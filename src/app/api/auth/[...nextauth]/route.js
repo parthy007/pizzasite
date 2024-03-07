@@ -7,14 +7,6 @@ import bcrypt from "bcrypt";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/libs/mongoConnect";
 
-async function refreshAccessToken(token) {
-  try {
-    console.log("Inside refreshAccessToken: ", token);
-  } catch (err) {
-    return { ...token, error: "RefreshAccessTokenError" };
-  }
-}
-
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.SECRET,
@@ -98,6 +90,12 @@ export const authOptions = {
       // console.log("NEXTAUTH JWT TOKEN", token);
       // console.log("NEXTAUTH JWT SESSION", session);
       // console.log("NEXTAUTH JWT ACCOUNT", account);
+      // console.log("NEXTAUTH JWT Trigger", trigger);
+
+      if (trigger === "update" && session?.name) {
+        token.user.name = session.name;
+      }
+
       delete token.name;
       delete token.email;
       delete token.picture;
@@ -116,12 +114,7 @@ export const authOptions = {
         // console.log("userdata: ", userData);
         token.user = userData;
       }
-      console.log("NEXTAUTH JWT USER FINAL", token);
-      if (account && user) {
-        if (account.expires_at && Date.now() >= account.expires_at * 1000) {
-          token = await refreshAccessToken(token);
-        }
-      }
+      // console.log("NEXTAUTH JWT USER FINAL", token);
 
       return token;
     },
@@ -146,7 +139,7 @@ export const authOptions = {
       return url.startsWith("/") ? baseUrl : url;
     },
   },
-  debug: process.env.NODE_ENV !== "production",
+  // debug: process.env.NODE_ENV !== "production",
 };
 
 const handler = NextAuth(authOptions);
