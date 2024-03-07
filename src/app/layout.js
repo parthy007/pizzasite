@@ -1,5 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import Header from "../components/layout/Header";
+import { AuthProvider } from "@/components/AuthProvider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -15,7 +17,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <main className=" max-w-4xl p-4 mx-auto">{children}</main>
+        <main className=" max-w-4xl p-4 mx-auto">
+          <AuthProvider>
+            <Header />
+            {children}
+            <footer className="border-t mt-16 p-8þ text-center text-gray-500 p-8">
+              &copy; 2024 All rights reserved
+            </footer>
+          </AuthProvider>
+        </main>
       </body>
     </html>
   );
