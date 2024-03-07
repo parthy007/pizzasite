@@ -1,10 +1,11 @@
 import Image from "next/image";
 import React from "react";
 import RightArrow from "../icons/RightArrow";
+import { useSession } from "next-auth/react";
 
 const Hero = () => {
   return (
-    <section className="hero">
+    <section className="hero mt-16">
       <div className="py-12">
         <h1 className="text-4xl font-semibold">
           Everything <br /> is better <br /> with a&nbsp;
@@ -15,11 +16,11 @@ const Hero = () => {
           delicious joy in life.
         </p>
         <div className="flex gap-4 text-sm">
-          <button className="bg-primary px-4 py-2 rounded-full uppercase text-white flex gap-2 items-center">
+          <button className="bg-primary px-4 py-2 rounded-full uppcase text-white flex gap-2 items-center justify-center">
             Order Now
             <RightArrow />
           </button>
-          <button className="flex gap-2 items-center py-2 font-semibold text-gray-700">
+          <button className="flex border-none gap-2 items-center py-2 font-semibold text-gray-700">
             Learn More
             <RightArrow />
           </button>
