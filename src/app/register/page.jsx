@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { signIn } from "next-auth/react";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -30,9 +31,7 @@ const RegisterPage = () => {
 
   return (
     <section className="mt-16">
-      <h1 className="text-primary font-bold text-4xl text-center mb-4">
-        Register
-      </h1>
+      <h1 className="text-primary text-4xl text-center mb-4">Register</h1>
       {userCreated && (
         <div className="text-center text-green-700">
           User successfully created.&nbsp;
@@ -68,7 +67,11 @@ const RegisterPage = () => {
         <div className="text-center text-gray-500 my-4">
           or login with provider
         </div>
-        <button className="flex gap-4 justify-center ">
+        <button
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+          className="flex gap-4 justify-center "
+          type="button"
+        >
           <Image src={"/google.png"} width={24} height={24} alt="googlelogo" />
           Login with Google
         </button>
