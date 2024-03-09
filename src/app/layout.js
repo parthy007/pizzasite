@@ -2,6 +2,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "../components/layout/Header";
 import { AuthProvider } from "@/components/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={roboto.className}>
         <main className=" max-w-4xl p-4 mx-auto">
+          <Toaster />
           <AuthProvider>
             <Header />
             {children}
