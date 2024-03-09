@@ -8,6 +8,12 @@ const userSchema = new Schema(
       type: String,
     },
     image: { type: String },
+    phone: { type: String },
+    address: { type: String },
+    pincode: { type: String },
+    city: { type: String },
+    country: { type: String },
+    admin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
