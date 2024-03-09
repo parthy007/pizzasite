@@ -60,7 +60,7 @@ export const authOptions = {
         // Check if the user exists in the database
         const dbUser = await User.findOne({ email: email });
         // console.log("NEXTAUTH SIGNIN USER FOUND", dbUser);
-
+        // if (dbUser) return dbUser;
         // If the user does not exist and is signing in with Google and email is verified
         if (
           !dbUser &&
@@ -94,6 +94,11 @@ export const authOptions = {
 
       if (trigger === "update" && session?.name) {
         token.user.name = session.name;
+        token.user.phone = session.phone;
+        token.user.address = session.address;
+        token.user.pincode = session.pincode;
+        token.user.city = session.city;
+        token.user.country = session.country;
       }
 
       delete token.name;
@@ -110,6 +115,12 @@ export const authOptions = {
           name: user.name,
           email: user.email,
           image: user.image,
+          phone: user.phone,
+          address: user.address,
+          pincode: user.pincode,
+          city: user.city,
+          country: user.country,
+          admin: user.admin,
         };
         // console.log("userdata: ", userData);
         token.user = userData;
@@ -123,8 +134,30 @@ export const authOptions = {
       // console.log("NEXTAUTH SESSION TOKEN", token);
 
       if (token.user) {
-        const { id, name, email, image } = token.user;
-        session.user = { id, name, email, image };
+        const {
+          id,
+          name,
+          email,
+          image,
+          phone,
+          address,
+          pincode,
+          city,
+          country,
+          admin,
+        } = token.user;
+        session.user = {
+          id,
+          name,
+          email,
+          image,
+          phone,
+          address,
+          pincode,
+          city,
+          country,
+          admin,
+        };
       }
       if (token.error) {
         session.error = token.error;
