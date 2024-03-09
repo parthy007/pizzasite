@@ -6,3 +6,46 @@ section.hero {
   @apply grid;
   grid-template-columns: 0.4fr 0.6fr;
 }
+
+input[type="email"],
+input[type="text"],
+input[type="tel"],
+input[type="password"] {
+  @apply block mb-2 p-2 w-full rounded-xl;
+  @apply bg-gray-100 border border-gray-300;
+}
+
+input[type="email"]:disabled,
+input[type="tel"]:disabled,
+input[type="text"]:disabled,
+input[type="password"]:disabled {
+  @apply bg-gray-300 cursor-not-allowed border-none text-gray-500;
+}
+
+button {
+  @apply block w-full text-gray-700 font-bold;
+  @apply border border-gray-300 rounded-xl px-6 py-2;
+}
+
+label {
+  @apply text-gray-500 text-sm;
+}
+label + input {
+  margin-top: -2px;
+}
+
+div.tabs > * {
+  @apply bg-gray-300 text-gray-500 px-4 py-2 rounded-full;
+}
+div.tabs > *.active {
+  @apply bg-primary text-white;
+}
+
+button[type="submit"],
+.submit {
+  @apply border-primary bg-primary text-white;
+}
+button[type="submit"]:disabled,
+.submit:disabled {
+  @apply bg-red-400 cursor-not-allowed;
+}
